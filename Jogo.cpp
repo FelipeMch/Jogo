@@ -10,16 +10,14 @@ Jogo::~Jogo()
 
 void Jogo::inicializar()
 {
-	uniInicializar(800, 600, false);
+	uniInicializar(900, 700, false);
 
-	//	O resto da inicialização vem aqui!
-	//	...
+	
 }
 
 void Jogo::finalizar()
 {
-	//	O resto da finalização vem aqui (provavelmente, em ordem inversa a inicialização)!
-	//	...
+	
 
 	uniFinalizar();
 }
@@ -30,8 +28,7 @@ void Jogo::executar()
 	{
 		uniIniciarFrame();
 
-		//	Seu código vem aqui!
-		//	...
+
 
 		uniTerminarFrame();
 	}
