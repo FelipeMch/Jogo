@@ -10,7 +10,7 @@ Jogo::~Jogo()
 
 void Jogo::inicializar()
 {
-	uniInicializar(900, 700, false);
+	uniInicializar(850, 800, false);
 
 	
 }
