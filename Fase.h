@@ -16,7 +16,7 @@ protected:
 
 	Sprite fundo;
 	Personagem persoPrincipal;
-	Objetos coco, guarda, castelo;
+	Objetos coco, guarda, tubarao;
 	Vetor2D posicao;
 	bool vivo, destrutivel;
 	

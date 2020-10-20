@@ -12,8 +12,8 @@ void Fase::inicializar()
 
 	persoPrincipal.inicializar();
 	coco.inicializar("coco", "bin/assets/imagens/cocoteste.png", 1, 1, 300, 300, 1, 1);
-	guarda.inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 425, 400, -500, 0);
-	//castelo.inicializar("castelo", "bin/assets/imagens/castelo1.png", 1, 1, 320, 400, 1, 1);
+	guarda.inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 425, 200, -500, 0);
+	tubarao.inicializar("castelo", "bin/assets/imagens/tubarao.png", 1, 1, 320, 400, 1, 1);
 }
 
 void Fase::desenhar()
@@ -22,7 +22,7 @@ void Fase::desenhar()
 	persoPrincipal.desenhar();
 	coco.desenhar();
 	guarda.desenhar();
-	//castelo.desenhar();
+	tubarao.desenhar();
 	
 }
 
