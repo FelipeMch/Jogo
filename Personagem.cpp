@@ -3,7 +3,7 @@
 void Personagem::inicializar()
 {
 	if (!gRecursos.carregouSpriteSheet("spritePersoPrincipal"))
-		gRecursos.carregarSpriteSheet("spritePersoPrincipal", "bin/assets/imagens/personagem.png", 1, 4);
+		gRecursos.carregarSpriteSheet("spritePersoPrincipal", "bin/assets/imagens/personagemteste.png", 1, 4);
 
 	spritePersoPrincipal.setSpriteSheet("spritePersoPrincipal");
 	spritePersoPrincipal.setVelocidadeAnimacao(4);
@@ -34,8 +34,6 @@ void Personagem::executar()
 	if ((gTeclado.segurando[TECLA_CIMA] || gTeclado.segurando[TECLA_W]) && posicao.y > spritePersoPrincipal.getAltura() / 2)
 		posicao.y -= velocidade;
 
-
-	
 }
 
 void Personagem::atualizarColisao(int v)
