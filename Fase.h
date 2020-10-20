@@ -1,18 +1,18 @@
 #pragma once
-#include "libUnicornio.h"
-#include "Obstaculos.h"
+#include "Personagem.h"
+
 
 class Fase
 {
 public:
 
-	void inicializar(Obstaculos *o, int nivel);
-	void finalizar();
+	void inicializar();
 	void executar();
+	void finalizar();
 
 protected:
 
-	Sprite obstaculo;
+	Sprite fundo;
 
 };
 

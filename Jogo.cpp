@@ -13,37 +13,11 @@ Jogo::~Jogo()
 
 void Jogo::inicializar()
 {
-	uniInicializar(900, 500, false);
+	uniInicializar(850, 800, false);
 
-	faseatual = 0;
-
-
-
-		
-	if (!gRecursos.carregouSpriteSheet("fundo"))
-	{
-		gRecursos.carregarSpriteSheet("fundo", "assets/imagens/fundo.png");
-	}
-	fundo.setSpriteSheet("fundo");
-
+	fase.inicializar();
+	persoPrincipal.inicializar();
 	
-
-	
-}
-
-void Jogo::finalizar()
-{
-	
-
-	uniFinalizar();
-}
-
-void Jogo::finalizar()
-{
-	//	O resto da finalização vem aqui (provavelmente, em ordem inversa a inicialização)!
-	//	...
-
-	uniFinalizar();
 }
 
 void Jogo::executar()
@@ -52,9 +26,19 @@ void Jogo::executar()
 	{
 		uniIniciarFrame();
 
-		fundo.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
+		fase.executar();
+		persoPrincipal.desenhar();
+		persoPrincipal.executar();
 
 		uniTerminarFrame();
 	}
+}
+
+void Jogo::finalizar()
+{
 	
+	fase.finalizar();
+	persoPrincipal .finalizar();
+
+	uniFinalizar();
 }

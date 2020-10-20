@@ -1,5 +1,5 @@
 #pragma once
-#include "libUnicornio.h"
+#include "Fase.h"
 
 class Jogo
 {
@@ -8,8 +8,12 @@ public:
 	~Jogo();
 
 	void inicializar();
+	void executar();
 	void finalizar();
 
-	void executar();
+protected:
+
+	Fase fase;
+	Personagem persoPrincipal;
 };
 
