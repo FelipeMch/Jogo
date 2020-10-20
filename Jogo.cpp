@@ -13,7 +13,6 @@ void Jogo::inicializar()
 	uniInicializar(850, 800, false);
 
 	fase.inicializar();
-	persoPrincipal.inicializar();
 	
 }
 
@@ -23,9 +22,8 @@ void Jogo::executar()
 	{
 		uniIniciarFrame();
 
+		fase.desenhar();
 		fase.executar();
-		persoPrincipal.desenhar();
-		persoPrincipal.executar();
 
 		uniTerminarFrame();
 	}
@@ -35,7 +33,6 @@ void Jogo::finalizar()
 {
 	
 	fase.finalizar();
-	persoPrincipal .finalizar();
-
+	
 	uniFinalizar();
 }
