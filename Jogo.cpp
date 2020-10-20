@@ -17,6 +17,12 @@ void Jogo::inicializar()
 
 	fase.inicializar();
 	persoPrincipal.inicializar();
+
+	tInicio = 0;
+	gRecursos.carregarFonte("fonte", "bin/assets/fontes/fonte.ttf", 17);
+	texto.setFonte("fonte");
+	texto.setCor(4, 0, 130);
+
 	
 }
 
@@ -29,6 +35,25 @@ void Jogo::executar()
 		fase.executar();
 		persoPrincipal.desenhar();
 		persoPrincipal.executar();
+
+		if (gTeclado.pressionou[TECLA_I]) {
+
+		tInicio = gTempo.getTicks();
+
+		if (tInicio == 0)
+		{
+		texto.desenhar(gJanela.getLargura() / 5, gJanela.getAltura() / 10);
+		}
+		
+		}
+		else
+		{
+
+		tempo = gTempo.getTempoAteTickAtual(tInicio);
+		texto.setString("Pontos " + to_string(tempo * 2));
+		texto.desenhar(gJanela.getLargura() / 5, gJanela.getAltura() / 10);
+
+		}
 
 		uniTerminarFrame();
 	}
