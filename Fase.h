@@ -1,11 +1,10 @@
 #pragma once
-#include "Fase.h"
+#include "Personagem.h"
 
-class Jogo
+
+class Fase
 {
 public:
-	Jogo();
-	~Jogo();
 
 	void inicializar();
 	void executar();
@@ -13,7 +12,7 @@ public:
 
 protected:
 
-	Fase fase;
-	Personagem persoPrincipal;
+	Sprite fundo;
+
 };
 
