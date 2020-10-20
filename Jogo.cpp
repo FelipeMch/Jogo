@@ -12,15 +12,9 @@ void Jogo::inicializar()
 {
 	uniInicializar(850, 800, false);
 
+	fase.inicializar();
+	persoPrincipal.inicializar();
 	
-}
-
-void Jogo::finalizar()
-{
-	//	O resto da finalização vem aqui (provavelmente, em ordem inversa a inicialização)!
-	//	...
-
-	uniFinalizar();
 }
 
 void Jogo::executar()
@@ -29,9 +23,19 @@ void Jogo::executar()
 	{
 		uniIniciarFrame();
 
-		//	Seu código vem aqui!
-		//	...
+		fase.executar();
+		persoPrincipal.desenhar();
+		persoPrincipal.executar();
 
 		uniTerminarFrame();
 	}
+}
+
+void Jogo::finalizar()
+{
+	
+	fase.finalizar();
+	persoPrincipal .finalizar();
+
+	uniFinalizar();
 }
