@@ -13,7 +13,7 @@ Jogo::~Jogo()
 
 void Jogo::inicializar()
 {
-	uniInicializar(850, 800, false);
+	uniInicializar(900, 500, false);
 
 	faseatual = 0;
 
@@ -34,6 +34,14 @@ void Jogo::inicializar()
 void Jogo::finalizar()
 {
 	
+
+	uniFinalizar();
+}
+
+void Jogo::finalizar()
+{
+	//	O resto da finalização vem aqui (provavelmente, em ordem inversa a inicialização)!
+	//	...
 
 	uniFinalizar();
 }
