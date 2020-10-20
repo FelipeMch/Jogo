@@ -30,7 +30,7 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem)
 
 	if (uniTestarColisao(sprite, posicao.x, posicao.y, 0, sprPersonagem, posPersonagem.x, posPersonagem.y, 0) && vivo)
 	{
-		if (destrutivel) // destrutível
+		if (destrutivel)
 		{
 			vivo = false;
 		}
