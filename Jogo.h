@@ -12,9 +12,7 @@ public:
 	void finalizar();
 
 protected:
-	Uint64 tInicio;
-	int tempo;
-	Texto texto;
+
 	Fase fase;
 	
 };
