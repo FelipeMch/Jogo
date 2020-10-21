@@ -23,7 +23,6 @@ void Fase::desenhar()
 	coco.desenhar();
 	guarda.desenhar();
 	//tubarao.desenhar();
-	
 }
 
 void Fase::executar()

@@ -27,7 +27,6 @@ void Personagem::desenhar()
 
 void Personagem::executar()
 {
-	
 	if ((gTeclado.segurando[TECLA_ESQ] || gTeclado.segurando[TECLA_A]) && posicao.x > spritePersoPrincipal.getLargura() / 2)
 		posicao.x -= velocidade;
 	if ((gTeclado.segurando[TECLA_DIR] || gTeclado.segurando[TECLA_D]) && posicao.x < 600)
@@ -41,14 +40,14 @@ void Personagem::executar()
 		podeMatar = true;
 		spritePersoPrincipal.setSpriteSheet("FacadaCorrendo");
 		spritePersoPrincipal.avancarAnimacao();
-		spritePersoPrincipal.setVelocidadeAnimacao(3);
+		spritePersoPrincipal.setVelocidadeAnimacao(2);
 	}
 	else
 	{
 		podeMatar = false;
 		spritePersoPrincipal.setSpriteSheet("spritePersoPrincipal");
 		spritePersoPrincipal.avancarAnimacao();
-		spritePersoPrincipal.setVelocidadeAnimacao(3);
+		spritePersoPrincipal.setVelocidadeAnimacao(2);
 	}
 }
 
