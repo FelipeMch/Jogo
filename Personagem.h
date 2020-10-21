@@ -11,12 +11,17 @@ public:
 	void executar();
 	void finalizar();
 	void desenhar();
+	Vetor2D getPosicao() { return posicao; }
+	Sprite getSprite() { return spritePersoPrincipal; }
+	void atualizarColisao(int v);
+	void resetarPosicao();
 
 protected:
 
 	Sprite spritePersoPrincipal;
-	Vetor2D posicao;
+	Vetor2D posicao, posicaoInicial;
 	float velocidade;
+	bool podeMatar;
 	
 };
 
