@@ -3,7 +3,7 @@
 void Personagem::inicializar()
 {
 	if (!gRecursos.carregouSpriteSheet("spritePersoPrincipal"))
-		gRecursos.carregarSpriteSheet("spritePersoPrincipal", "bin/assets/imagens/personagem.png", 1, 4);
+		gRecursos.carregarSpriteSheet("spritePersoPrincipal", "bin/assets/imagens/personagemteste.png", 1, 4);
 
 	spritePersoPrincipal.setSpriteSheet("spritePersoPrincipal");
 	spritePersoPrincipal.setVelocidadeAnimacao(4);
