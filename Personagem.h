@@ -21,6 +21,7 @@ protected:
 	Sprite spritePersoPrincipal;
 	Vetor2D posicao, posicaoInicial;
 	float velocidade;
+	bool podeMatar;
 	
 };
 
