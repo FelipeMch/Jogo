@@ -14,9 +14,9 @@ public:
 protected:
 
 	Fase fase;
-	/*Uint64 tInicio;
+	Uint64 tInicio;
 	int tempo;
-	Texto texto;*/
+	Texto texto;
 	
 };
 
