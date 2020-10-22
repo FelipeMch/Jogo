@@ -56,7 +56,7 @@ void Personagem::atualizarColisao(int v)
 
 	if (v > 0)
 	{
-
+		pontos += v;
 	}
 
 	if (v == -500)

@@ -13,6 +13,7 @@ public:
 	void desenhar();
 	Vetor2D getPosicao() { return posicao; }
 	Sprite getSprite() { return spritePersoPrincipal; }
+	int getPontos() { return pontos; }
 	void atualizarColisao(int v);
 	void resetarPosicao();
 
@@ -21,6 +22,7 @@ protected:
 	Sprite spritePersoPrincipal;
 	Vetor2D posicao, posicaoInicial;
 	float velocidade;
+	int pontos;
 	bool podeMatar;
 	
 };
