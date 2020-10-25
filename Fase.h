@@ -18,9 +18,8 @@ protected:
 	Personagem persoPrincipal;
 	Objetos cocos[4], guarda, tubarao;
 	Vetor2D posicoes[2];
-	bool vivo, destrutivel;
 	Uint64 tInicio;
-	int tempo;
+	int tempo, velocidade = 0;
 	Texto texto;
 
 };

@@ -14,7 +14,6 @@ void Personagem::inicializar()
 	posicao.x = gJanela.getLargura() / 2;
 	posicao.y = 720;
 	posicaoInicial = posicao;
-	podeMatar = false;
 	
 }
 
@@ -37,17 +36,17 @@ void Personagem::executar()
 		posicao.y -= velocidade;
 	if (gTeclado.segurando[TECLA_ESPACO])
 	{ 
-		podeMatar = true;
 		spritePersoPrincipal.setSpriteSheet("FacadaCorrendo");
 		spritePersoPrincipal.avancarAnimacao();
 		spritePersoPrincipal.setVelocidadeAnimacao(2);
+		podeMatar = true;
 	}
 	else
 	{
-		podeMatar = false;
 		spritePersoPrincipal.setSpriteSheet("spritePersoPrincipal");
 		spritePersoPrincipal.avancarAnimacao();
 		spritePersoPrincipal.setVelocidadeAnimacao(2);
+		podeMatar = false;
 	}
 }
 
@@ -59,7 +58,7 @@ void Personagem::atualizarColisao(int v)
 		pontos += v;
 	}
 
-	if (v == -500)
+	if (v < 0)
 	{
 		resetarPosicao();
 	}

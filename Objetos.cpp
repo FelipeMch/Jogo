@@ -9,6 +9,7 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
+	velocidade = 1;
 
 	if (!gRecursos.carregouSpriteSheet(this->nome))
 		gRecursos.carregarSpriteSheet(this->nome, this->caminho, animacoes, frames);
@@ -23,15 +24,22 @@ void Objetos::desenhar()
 		sprite.desenhar(posicao.x, posicao.y);
 }
 
-int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem)
+int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verificarMorte)
 {
-	//if(posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
-		//posicao.y++;
+	if(posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
+		posicao.y = posicao.y + velocidade;
 
 	if (uniTestarColisao(sprite, posicao.x, posicao.y, 0, sprPersonagem, posPersonagem.x, posPersonagem.y, 0) && vivo)
 	{
-		if (destrutivel)
+		if (destrutivel && valor > 0)
+		{
 			vivo = false;
+		}
+		if ((destrutivel) && (valor < 0) && (verificarMorte == true))
+		{
+			valor = 1;
+			vivo = false;
+		}
 		else
 		{
 
