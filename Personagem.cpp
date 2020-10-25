@@ -2,11 +2,13 @@
 
 void Personagem::inicializar()
 {
-	if (!gRecursos.carregouSpriteSheet("spritePersoPrincipal"))
+	if (!gRecursos.carregouSpriteSheet("spritePersoPrincipal") && !gRecursos.carregouSpriteSheet("FacadaCorrendo"))
+	{
 		gRecursos.carregarSpriteSheet("spritePersoPrincipal", "bin/assets/imagens/personagemteste.png", 1, 4);
+		gRecursos.carregarSpriteSheet("FacadaCorrendo", "bin/assets/imagens/teste1faca.png", 1, 6);
+	}
 
 	spritePersoPrincipal.setSpriteSheet("spritePersoPrincipal");
-	spritePersoPrincipal.setVelocidadeAnimacao(4);
 	
 	velocidade = 3;
 	posicao.x = gJanela.getLargura() / 2;
@@ -24,7 +26,6 @@ void Personagem::desenhar()
 
 void Personagem::executar()
 {
-	
 	if ((gTeclado.segurando[TECLA_ESQ] || gTeclado.segurando[TECLA_A]) && posicao.x > spritePersoPrincipal.getLargura() / 2)
 		posicao.x -= velocidade;
 	if ((gTeclado.segurando[TECLA_DIR] || gTeclado.segurando[TECLA_D]) && posicao.x < 600)
@@ -33,7 +34,20 @@ void Personagem::executar()
 		posicao.y += velocidade;	
 	if ((gTeclado.segurando[TECLA_CIMA] || gTeclado.segurando[TECLA_W]) && posicao.y > spritePersoPrincipal.getAltura() / 2)
 		posicao.y -= velocidade;
-
+	if (gTeclado.segurando[TECLA_ESPACO])
+	{ 
+		spritePersoPrincipal.setSpriteSheet("FacadaCorrendo");
+		spritePersoPrincipal.avancarAnimacao();
+		spritePersoPrincipal.setVelocidadeAnimacao(2);
+		podeMatar = true;
+	}
+	else
+	{
+		spritePersoPrincipal.setSpriteSheet("spritePersoPrincipal");
+		spritePersoPrincipal.avancarAnimacao();
+		spritePersoPrincipal.setVelocidadeAnimacao(2);
+		podeMatar = false;
+	}
 }
 
 void Personagem::atualizarColisao(int v)
@@ -41,10 +55,10 @@ void Personagem::atualizarColisao(int v)
 
 	if (v > 0)
 	{
-
+		pontos += v;
 	}
 
-	if (v == -500)
+	if (v < 0)
 	{
 		resetarPosicao();
 	}

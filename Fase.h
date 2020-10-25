@@ -16,10 +16,11 @@ protected:
 
 	Sprite fundo;
 	Personagem persoPrincipal;
-	Objetos coco, guarda, tubarao;
-	Vetor2D posicao;
-	bool vivo, destrutivel;
-	
+	Objetos cocos[4], guarda, tubarao;
+	Vetor2D posicoes[2];
+	Uint64 tInicio;
+	int tempo, velocidade = 0;
+	Texto texto;
 
 };
 

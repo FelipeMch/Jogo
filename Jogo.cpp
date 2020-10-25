@@ -13,7 +13,7 @@ void Jogo::inicializar()
 	uniInicializar(850, 800, false);
 
 	fase.inicializar();
-	
+
 }
 
 void Jogo::executar()
@@ -24,6 +24,8 @@ void Jogo::executar()
 
 		fase.desenhar();
 		fase.executar();
+		
+
 
 		uniTerminarFrame();
 	}
