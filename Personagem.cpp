@@ -34,7 +34,7 @@ void Personagem::executar()
 		posicao.y += velocidade;	
 	if ((gTeclado.segurando[TECLA_CIMA] || gTeclado.segurando[TECLA_W]) && posicao.y > spritePersoPrincipal.getAltura() / 2)
 		posicao.y -= velocidade;
-	if (gTeclado.segurando[TECLA_ESPACO])
+	if (gMouse.segurando[BOTAO_MOUSE_ESQ])
 	{ 
 		spritePersoPrincipal.setSpriteSheet("FacadaCorrendo");
 		spritePersoPrincipal.avancarAnimacao();
