@@ -17,13 +17,10 @@ protected:
 
 	Sprite sprite;
 	string nome, caminho;
-	Vetor2D posicao, posicaoInicial, posicoes[3];
+	Vetor2D posicao, posicoes[3];
 	bool vivo, destrutivel;
-	int valor, velocidade = 0, tempo, sorteado;
-	Uint64 tInicio;
+	int valor, velocidade = 0, sorteado;
 
-	
-	
 	
 };
 

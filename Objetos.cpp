@@ -11,7 +11,6 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	posicoes[2].x = 185;
 	for (int p = 0; p < 3; p++)
 		posicoes[p].y = -100;
-	posicaoInicial = posicao;
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;

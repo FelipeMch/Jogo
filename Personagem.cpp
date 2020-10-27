@@ -83,6 +83,7 @@ void Personagem::resetarPosicao()
 void Personagem::finalizar()
 {
 	gRecursos.descarregarSpriteSheet("persoPrincipal");
+	gRecursos.descarregarSpriteSheet("FacadaCorrendo");
 }
 
 
