@@ -6,10 +6,12 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	this->caminho = caminho;
 	posicao.x = posicaox;
 	posicao.y = posicaoy;
+	posicaoInicial = posicao;
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
 	velocidade = 1;
+
 
 	if (!gRecursos.carregouSpriteSheet(this->nome))
 		gRecursos.carregarSpriteSheet(this->nome, this->caminho, animacoes, frames);
@@ -29,16 +31,20 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 	if(posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
 		posicao.y = posicao.y + velocidade;
 
+
 	if (uniTestarColisao(sprite, posicao.x, posicao.y, 0, sprPersonagem, posPersonagem.x, posPersonagem.y, 0) && vivo)
 	{
 		if (destrutivel && valor > 0)
 		{
 			vivo = false;
+			resetarPosicao();
 		}
-		if ((destrutivel) && (valor < 0) && (verificarMorte == true))
+		if ((destrutivel) && (verificarMorte == true))
 		{
-			valor = 1;
+
 			vivo = false;
+			resetarPosicao();
+			
 		}
 		else
 		{
@@ -48,8 +54,17 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 		return valor;
 	}
 
+	if (posicao.y > 800)
+		resetarPosicao();
 
 	return 0;
+}
+
+void Objetos::resetarPosicao()
+{
+	vivo = true;
+	posicao = posicaoInicial;
+
 }
 
 void Objetos::finalizar()
@@ -58,3 +73,6 @@ void Objetos::finalizar()
 	gRecursos.descarregarSpriteSheet(nome);
 
 }
+
+
+

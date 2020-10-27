@@ -3,6 +3,7 @@
 #include "Objetos.h"
 
 
+
 class Fase
 {
 public:
@@ -11,6 +12,7 @@ public:
 	void desenhar();
 	void executar();
 	void finalizar();
+	
 
 protected:
 

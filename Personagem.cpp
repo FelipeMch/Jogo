@@ -1,5 +1,6 @@
 #include "Personagem.h"
 
+
 void Personagem::inicializar()
 {
 	if (!gRecursos.carregouSpriteSheet("spritePersoPrincipal") && !gRecursos.carregouSpriteSheet("FacadaCorrendo"))
@@ -53,15 +54,16 @@ void Personagem::executar()
 void Personagem::atualizarColisao(int v)
 {
 
-	if (v > 0)
+	if (v > 0) // Valores maior que zero são os bonus, no caso coco.
 	{
 		pontos += v;
+		
+	}
+	if (v < 0 && podeMatar == false) // guardas.
+	{
+	
 	}
 
-	if (v < 0)
-	{
-		resetarPosicao();
-	}
 }
 
 void Personagem::resetarPosicao()

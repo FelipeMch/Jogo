@@ -1,5 +1,6 @@
 #pragma once
 #include "libUnicornio.h"
+#include <ctime>
 
 
 
@@ -13,7 +14,8 @@ public:
 	void desenhar();
 	Vetor2D getPosicao() { return posicao; }
 	Sprite getSprite() { return spritePersoPrincipal; }
-	bool getPodeMatar() { return podeMatar;  }
+	bool getPodeMatar() { return podeMatar; }
+	
 	int getPontos() { return pontos; }
 	void atualizarColisao(int v);
 	void resetarPosicao();
