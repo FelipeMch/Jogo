@@ -3,7 +3,6 @@
 #include <ctime>
 
 
-
 class Personagem
 {
 public:
@@ -15,9 +14,9 @@ public:
 	Vetor2D getPosicao() { return posicao; }
 	Sprite getSprite() { return spritePersoPrincipal; }
 	bool getPodeMatar() { return podeMatar; }
-	
+	bool getMorte() { return vivo; }
 	int getPontos() { return pontos; }
-	void atualizarColisao(int v);
+	void atualizarColisao(int v, bool morte);
 	void resetarPosicao();
 
 protected:
@@ -26,8 +25,8 @@ protected:
 	Vetor2D posicao, posicaoInicial;
 	float velocidade;
 	int pontos;
-	bool podeMatar;
-
+	bool podeMatar, vivo;
+	
 	
 };
 

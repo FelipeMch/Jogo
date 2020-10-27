@@ -8,21 +8,19 @@ class Fase
 {
 public:
 
-	void inicializar();
+	void inicializar(Personagem *p);
 	void desenhar();
 	void executar();
 	void finalizar();
-	
 
 protected:
 
 	Sprite fundo;
-	Personagem persoPrincipal;
+	Personagem *persoPrincipal;
 	Objetos cocos[4], guarda, tubarao;
 	Vetor2D posicoes[2];
 	Uint64 tInicio;
 	int tempo, velocidade = 0;
 	Texto texto;
-
 };
 

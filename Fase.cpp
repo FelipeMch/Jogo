@@ -1,6 +1,6 @@
 #include "Fase.h"
 
-void Fase::inicializar()
+void Fase::inicializar(Personagem *personagem)
 {
 	if(!gRecursos.carregouSpriteSheet("background"))
 		gRecursos.carregarSpriteSheet("background", "bin/assets/imagens/fundopraia.png", 1, 1);
@@ -8,11 +8,12 @@ void Fase::inicializar()
 	fundo.setSpriteSheet("background");
 
 	//Inicialização do Personagem e objetos.
-	persoPrincipal.inicializar();
+	persoPrincipal = personagem; // associa personagem do jogo com o da fase;
+	persoPrincipal->inicializar();
 	for (int c = 0; c < 2; c++)
-		cocos[c].inicializar("coco", "bin/assets/imagens/cocoteste.png", 1, 1, 300, 0 + c * -80, 1, 1);
-	guarda.inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 425, -100, -500, 0);
-	tubarao.inicializar("tubarao", "bin/assets/imagens/tubarao.png", 1, 1, 320, -240, -50, 1);
+		cocos[c].inicializar("coco", "bin/assets/imagens/cocoteste.png", 1, 1, 300, 0 + c * -80, 10, true);
+	guarda.inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 425, -100, -500, false);
+	tubarao.inicializar("tubarao", "bin/assets/imagens/tubarao.png", 1, 1, 320, -240, -500, true);
 
 	//Inicialação do tempo.
 	tInicio = gTempo.getTicks();
@@ -26,13 +27,14 @@ void Fase::inicializar()
 	posicoes[1].x = gJanela.getLargura() / 2;
 	posicoes[1].y = gJanela.getAltura() / 2 - gJanela.getAltura();
 	velocidade = 2;
+	
 }
 
 void Fase::desenhar()
 {
 	fundo.desenhar(posicoes[0].x, posicoes[0].y);
 	fundo.desenhar(posicoes[1].x, posicoes[1].y);
-	persoPrincipal.desenhar();
+	persoPrincipal->desenhar();
 	for (int c = 0; c < 2; c++)
 		cocos[c].desenhar();
 	guarda.desenhar();
@@ -54,28 +56,26 @@ void Fase::executar()
 	if (posicoes[1].y == +gJanela.getAltura() / 2)
 		posicoes[0].y = gJanela.getAltura() / 2 - gJanela.getAltura();	
 
+	//Atualizações das execuções
+	persoPrincipal->executar();
+	for (int c = 0; c < 2; c++)
+		cocos[c].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+	guarda.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+	tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
 
 	//Atualizações das colisões
 	for (int c = 0; c < 2; c++)
-		persoPrincipal.atualizarColisao(cocos[c].executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar()));
-	persoPrincipal.atualizarColisao(guarda.executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar()));
-	persoPrincipal.atualizarColisao(tubarao.executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar()));
+		persoPrincipal->atualizarColisao(cocos[c].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), cocos[c].getDestrutivel());
+	persoPrincipal->atualizarColisao(guarda.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), guarda.getDestrutivel());
+	persoPrincipal->atualizarColisao(tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), tubarao.getDestrutivel());
 
 
-	//Atualizações das execuções
-	persoPrincipal.executar();
-	for (int c = 0; c < 2; c++)
-		cocos[c].executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar());
-	guarda.executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar());
-	tubarao.executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar());
-
-	
 }
 
 void Fase::finalizar()
 {
 	gRecursos.descarregarSpriteSheet("background");
-	persoPrincipal.finalizar();
+	persoPrincipal->finalizar();
 	for (int c = 0; c < 2; c++)
 		cocos[c].finalizar();
 	guarda.finalizar();

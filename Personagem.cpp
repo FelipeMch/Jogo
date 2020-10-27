@@ -15,6 +15,8 @@ void Personagem::inicializar()
 	posicao.x = gJanela.getLargura() / 2;
 	posicao.y = 720;
 	posicaoInicial = posicao;
+	vivo = true;
+	podeMatar = false;
 	
 }
 
@@ -51,19 +53,25 @@ void Personagem::executar()
 	}
 }
 
-void Personagem::atualizarColisao(int v)
+void Personagem::atualizarColisao(int v, bool morte)
 {
 
-	if (v > 0) // Valores maior que zero são os bonus, no caso coco.
+	if (v > 0) // Valores maiores que zero são os bonus, no caso o coco.
 	{
 		pontos += v;
-		
 	}
-	if (v < 0 && podeMatar == false) // guardas.
+	else if (v < 0 && morte == false) // guardas.
 	{
-	
+		vivo = false;
 	}
-
+	else if (v < 0 && morte == true && podeMatar == true) // Se o obstaculo que é destrutivel pode morrer.
+	{
+		pontos += 10;
+	}
+	else if (v < 0 && morte == true && podeMatar == false) // Se o obstaculo que é destrutivel pode matar o jogador.
+	{
+		vivo = false;
+	}
 }
 
 void Personagem::resetarPosicao()

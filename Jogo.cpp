@@ -38,7 +38,7 @@ void Jogo::inicializar()
 	
 	telaAtual = tInicial;
 
-	fase.inicializar();
+	fase.inicializar(&personagem); //& pega o endereço do personagem na memória
 
 }
 
@@ -113,6 +113,10 @@ void Jogo::telaJogo()
 {
 	fase.desenhar();
 	fase.executar();
+	if (personagem.getMorte() == false)
+	{
+		telaAtual = tGameOver;
+	}
 
 }
 

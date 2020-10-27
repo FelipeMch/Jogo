@@ -7,6 +7,7 @@ enum Botoes { bJogar, bCreditos, bInstrucoes, bSair, bOk, bVoltar };
 class Jogo
 {
 public:
+
 	Jogo();
 	~Jogo();
 
@@ -19,6 +20,7 @@ protected:
 	Fase fase;
 	Telas telaAtual;
 	BotaoSprite botoes[6];
+	Personagem personagem;
 	void telaInicial();
 	void telaJogo();
 	void telaCreditos();
