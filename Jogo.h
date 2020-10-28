@@ -19,6 +19,7 @@ protected:
 
 	Fase fase;
 	Telas telaAtual;
+	Sprite background;
 	BotaoSprite botoes[6];
 	Personagem personagem;
 	void telaInicial();

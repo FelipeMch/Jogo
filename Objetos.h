@@ -11,6 +11,8 @@ public:
 	void resetarPosicao();
 	bool getDestrutivel() { return destrutivel; }
 	void finalizar();
+	void setVelocidade();
+
 	
 
 protected:
@@ -19,8 +21,8 @@ protected:
 	string nome, caminho;
 	Vetor2D posicao, posicoes[3];
 	bool vivo, destrutivel;
-	int valor, velocidade = 0, sorteado;
-
+	int valor, velocidade = 0, sorteado, tempo;
+	Uint64 tInicio;
 	
 };
 

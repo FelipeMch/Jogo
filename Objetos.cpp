@@ -16,10 +16,13 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	vivo = true;
 	velocidade = 1;
 	srand(time(0));
+	tInicio = gTempo.getTicks();
 
 
 	if (!gRecursos.carregouSpriteSheet(this->nome))
 		gRecursos.carregarSpriteSheet(this->nome, this->caminho, animacoes, frames);
+	if (!gRecursos.carregouSpriteSheet("corteTubarao"))
+		gRecursos.carregarSpriteSheet("corteTubarao", "bin/assets/imagens/tubaraocorte.png", 1, 6);
 
 	sprite.setSpriteSheet(this->nome);
 
@@ -27,14 +30,18 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 
 void Objetos::desenhar()
 {
-	if(vivo)
+	if (vivo)
+	{
 		sprite.desenhar(posicao.x, posicao.y);
+		sprite.avancarAnimacao();
+		sprite.setVelocidadeAnimacao(8);
+	}
 }
 
 int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verificarMorte)
 {
-	if(posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
-		posicao.y = posicao.y + velocidade;
+	setVelocidade();
+	tempo = gTempo.getTempoAteTickAtual(tInicio);
 
 	if (uniTestarColisao(sprite, posicao.x, posicao.y, 0, sprPersonagem, posPersonagem.x, posPersonagem.y, 0) && vivo)
 	{
@@ -44,13 +51,26 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 			resetarPosicao();
 		}
 		if (destrutivel && verificarMorte == true && valor < 0)
-		{
+		{	
+
 			vivo = false;
 			resetarPosicao();
+			/*if (sprite.getAnimacao() == 0)
+			{
+				sprite.setAnimacao(1, true);
+			}
+			else
+			{
+				if (sprite.terminouAnimacao())
+				{
+					vivo = false;
+					resetarPosicao();
+				}
+			}*/
 		}
 		else
 		{
-
+		
 		}
 
 		return valor;
@@ -79,6 +99,20 @@ void Objetos::finalizar()
 {
 	gRecursos.descarregarSpriteSheet(nome);
 }
+
+void Objetos::setVelocidade()
+{
+	if(tempo < 15)
+		if (posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
+			posicao.y = posicao.y + velocidade;
+	if (tempo >= 15)
+	{
+		if (posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
+			posicao.y = posicao.y + velocidade;
+	}
+}
+
+
 
 
 

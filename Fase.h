@@ -12,6 +12,7 @@ public:
 	void desenhar();
 	void executar();
 	void finalizar();
+	void controladorVelocidade();
 
 protected:
 
