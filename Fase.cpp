@@ -84,8 +84,8 @@ void Fase::finalizar()
 
 void Fase::controladorVelocidade()
 {
-	/*if (tempo >= 7)
-		velocidade = 2;*/
+	//if (tempo >= 7)
+	//	velocidade = 3;
 
 	posicoes[0].y = posicoes[0].y + velocidade;
 	posicoes[1].y = posicoes[1].y + velocidade;

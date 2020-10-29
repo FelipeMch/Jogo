@@ -10,6 +10,7 @@ public:
 	int executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verificarMorte);
 	void resetarPosicao();
 	bool getDestrutivel() { return destrutivel; }
+	Vetor2D getposicao() { return posicao; }
 	void finalizar();
 	void setVelocidade();
 

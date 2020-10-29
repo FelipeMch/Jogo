@@ -169,4 +169,7 @@ void Jogo::telaInstrucoes()
 
 void Jogo::telaGameOver()
 {
+	background.desenhar(425, 400);
+	background.avancarAnimacao();
+	background.setVelocidadeAnimacao(0.4);
 }

@@ -32,9 +32,11 @@ void Objetos::desenhar()
 {
 	if (vivo)
 	{
+		
 		sprite.desenhar(posicao.x, posicao.y);
 		sprite.avancarAnimacao();
 		sprite.setVelocidadeAnimacao(8);
+		
 	}
 }
 
@@ -92,6 +94,8 @@ void Objetos::resetarPosicao()
 		posicao = posicoes[1];
 	else if (sorteado == 2)
 		posicao = posicoes[2];
+	
+	
 }	
 
 
