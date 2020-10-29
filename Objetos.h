@@ -11,6 +11,7 @@ public:
 	void resetarPosicao();
 	bool getDestrutivel() { return destrutivel; }
 	Vetor2D getposicao() { return posicao; }
+	Vetor2D getposicoes() { return posicoes[0]; }
 	void finalizar();
 	void setVelocidade();
 
@@ -20,7 +21,7 @@ protected:
 
 	Sprite sprite;
 	string nome, caminho;
-	Vetor2D posicao, posicoes[3];
+	Vetor2D posicao, posicoes[4];
 	bool vivo, destrutivel;
 	int valor, velocidade = 0, sorteado, tempo;
 	Uint64 tInicio;

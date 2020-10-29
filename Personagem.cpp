@@ -33,10 +33,10 @@ void Personagem::executar()
 		posicao.x -= velocidade;
 	if ((gTeclado.segurando[TECLA_DIR] || gTeclado.segurando[TECLA_D]) && posicao.x < 600)
 		posicao.x += velocidade;	
-	if ((gTeclado.segurando[TECLA_BAIXO] || gTeclado.segurando[TECLA_S]) && posicao.y < 740)
-		posicao.y += velocidade;	
-	if ((gTeclado.segurando[TECLA_CIMA] || gTeclado.segurando[TECLA_W]) && posicao.y > spritePersoPrincipal.getAltura() / 2)
-		posicao.y -= velocidade;
+	//if ((gTeclado.segurando[TECLA_BAIXO] || gTeclado.segurando[TECLA_S]) && posicao.y < 740)
+	//	posicao.y += velocidade;	
+	//if ((gTeclado.segurando[TECLA_CIMA] || gTeclado.segurando[TECLA_W]) && posicao.y > spritePersoPrincipal.getAltura() / 2)
+	//	posicao.y -= velocidade;
 	if (gMouse.segurando[BOTAO_MOUSE_ESQ])
 	{ 
 		spritePersoPrincipal.setSpriteSheet("FacadaCorrendo");

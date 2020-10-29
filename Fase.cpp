@@ -15,7 +15,7 @@ void Fase::inicializar(Personagem *personagem)
 	for (int c = 0; c < 2; c++)
 		cocos[c].inicializar("coco", "bin/assets/imagens/cocoteste.png", 1, 1, 300, 0 + c * -80, 10, true);
 	guarda.inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 425, -100, -500, false);
-	tubarao.inicializar("tubarao", "bin/assets/imagens/tubarao.png", 1, 1, 320, -240, -100, true);
+	tubarao.inicializar("tubarao", "bin/assets/imagens/tubaraonovo.png", 2, 2, 320, -100, -100, true);
 	
 
 	//Inicialação do tempo.

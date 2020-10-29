@@ -38,11 +38,11 @@ void Jogo::inicializar()
 
 	gRecursos.carregarSpriteSheet("bOk", "bin/assets/botoes/ok.png", 3);
 	botoes[bOk].setSpriteSheet("bOk");
-	botoes[bOk].setPos(gJanela.getLargura() / 2, 400);
+	botoes[bOk].setPos(750, 750);
 
 	gRecursos.carregarSpriteSheet("bVoltar", "bin/assets/botoes/voltar.png", 3);
 	botoes[bVoltar].setSpriteSheet("bVoltar");
-	botoes[bVoltar].setPos(gJanela.getLargura() / 2, 400);
+	botoes[bVoltar].setPos(750, 750);
 	
 	telaAtual = tInicial;
 
@@ -169,6 +169,8 @@ void Jogo::telaInstrucoes()
 
 void Jogo::telaGameOver()
 {
+	if (!gMusica.estaTocando())
+		gMusica.tocar("praiafundo", 10);
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
