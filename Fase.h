@@ -11,6 +11,7 @@ public:
 	void inicializar(Personagem *p);
 	void desenhar();
 	void executar();
+	int getVelocidade() { return velocidade; }
 	void finalizar();
 	void controladorVelocidade();
 
@@ -18,7 +19,7 @@ protected:
 
 	Sprite fundo;
 	Personagem *persoPrincipal;
-	Objetos cocos[4], guarda, tubarao;
+	Objetos cocos[4], guardas[2], tubarao;
 	Vetor2D posicoes[2];
 	Uint64 tInicio;
 	int tempo, velocidade = 0;

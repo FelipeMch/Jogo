@@ -11,11 +11,11 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	posicoes[2].x = 185;
 	posicoes[3].x = 600;
 	for (int p = 0; p < 4; p++)
-		posicoes[p].y = -100;
+		posicoes[p].y = -60 * p - 130;
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
-	velocidade = 2;
+	velocidade = 1;
 	srand(time(0));
 	tInicio = gTempo.getTicks();
 
@@ -34,7 +34,6 @@ void Objetos::desenhar()
 		sprite.desenhar(posicao.x, posicao.y);
 		sprite.avancarAnimacao();
 		sprite.setVelocidadeAnimacao(15);
-	
 	}
 }
 
@@ -83,19 +82,23 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 
 void Objetos::resetarPosicao()
 {
-	sorteado = rand() % 4;
+
 	vivo = true;
-	if(sprite.getAnimacao() == 1)
+	if (sprite.getAnimacao() == 1)
 		sprite.setAnimacao(0, true);
-	if (sorteado == 0)
+
+	if (valor == -100)
 		posicao = posicoes[0];
-	else if (sorteado == 1)
-		posicao = posicoes[1];
-	else if (sorteado == 2)
-		posicao = posicoes[2];
-	else if (sorteado == 3)
-		posicao = posicoes[3];
-	
+	else
+	{
+		sorteado = rand() % 3 + 1;
+		if (sorteado == 1)
+			posicao = posicoes[1];
+		else if (sorteado == 2)
+			posicao = posicoes[2];
+		else if (sorteado == 3)
+			posicao = posicoes[3];
+	}
 	
 }	
 
@@ -106,15 +109,15 @@ void Objetos::finalizar()
 }
 
 void Objetos::setVelocidade()
-{
-	if(tempo < 15)
-		if (posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
-			posicao.y = posicao.y + velocidade;
-	if (tempo >= 15)
-	{
-		if (posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
-			posicao.y = posicao.y + velocidade;
-	}
+{			
+	if (tempo >= 21)
+		velocidade = 2;
+	if (tempo >= 52)
+		velocidade = 4;
+	if (tempo >= 154)
+		velocidade = 5;
+
+	posicao.y = posicao.y + velocidade;
 }
 
 

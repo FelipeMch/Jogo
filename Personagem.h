@@ -24,7 +24,8 @@ protected:
 	Sprite spritePersoPrincipal;
 	Vetor2D posicao, posicaoInicial;
 	float velocidade;
-	int pontos;
+	int pontos, tempo;
+	Uint64 tInicio;
 	bool podeMatar, vivo;
 	
 	

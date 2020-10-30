@@ -26,5 +26,6 @@ protected:
 	int valor, velocidade = 0, sorteado, tempo;
 	Uint64 tInicio;
 	
+	
 };
 

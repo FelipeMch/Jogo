@@ -3,11 +3,12 @@
 
 void Personagem::inicializar()
 {
-	if (!gRecursos.carregouSpriteSheet("spritePersoPrincipal") && !gRecursos.carregouSpriteSheet("FacadaCorrendo"))
-	{
+	if (!gRecursos.carregouSpriteSheet("spritePersoPrincipal"))
 		gRecursos.carregarSpriteSheet("spritePersoPrincipal", "bin/assets/imagens/personagemteste.png", 1, 4);
+	if (!gRecursos.carregouSpriteSheet("FacadaCorrendo"))
 		gRecursos.carregarSpriteSheet("FacadaCorrendo", "bin/assets/imagens/teste1faca.png", 1, 6);
-	}
+	if (!gRecursos.carregouAudio("apito"))
+		gRecursos.carregarAudio("apito", "bin/assets/audios/apito.mp3");
 
 	spritePersoPrincipal.setSpriteSheet("spritePersoPrincipal");
 	
@@ -17,6 +18,7 @@ void Personagem::inicializar()
 	posicaoInicial = posicao;
 	vivo = true;
 	podeMatar = false;
+	tInicio = gTempo.getTicks();
 	
 }
 
@@ -29,6 +31,12 @@ void Personagem::desenhar()
 
 void Personagem::executar()
 {
+	tempo = gTempo.getTempoAteTickAtual(tInicio);
+	if (tempo >= 52)
+		velocidade = 4;
+	if (tempo >= 100)
+		velocidade = 5;
+
 	if ((gTeclado.segurando[TECLA_ESQ] || gTeclado.segurando[TECLA_A]) && posicao.x > spritePersoPrincipal.getLargura() / 2)
 		posicao.x -= velocidade;
 	if ((gTeclado.segurando[TECLA_DIR] || gTeclado.segurando[TECLA_D]) && posicao.x < 600)
@@ -62,6 +70,7 @@ void Personagem::atualizarColisao(int v, bool morte)
 	}
 	else if (v < 0 && morte == false) // guardas.
 	{
+		gAudios.tocar("apito", 15);
 		vivo = false;
 	}
 	else if (v < 0 && morte == true && podeMatar == true) // Se o obstaculo que é destrutivel pode morrer.
@@ -84,6 +93,7 @@ void Personagem::finalizar()
 {
 	gRecursos.descarregarSpriteSheet("persoPrincipal");
 	gRecursos.descarregarSpriteSheet("FacadaCorrendo");
+	gRecursos.descarregarAudio("apito");
 }
 
 
