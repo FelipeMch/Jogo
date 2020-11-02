@@ -12,6 +12,7 @@ public:
 	void desenhar();
 	void executar();
 	int getVelocidade() { return velocidade; }
+	int getTempo() { return tempo; }
 	void finalizar();
 	void controladorVelocidade();
 

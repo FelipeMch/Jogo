@@ -22,6 +22,8 @@ protected:
 	Sprite background;
 	BotaoSprite botoes[6];
 	Personagem personagem;
+	Texto texto;
+	int pontosTotais;
 	void telaInicial();
 	void telaJogo();
 	void telaCreditos();

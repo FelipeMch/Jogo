@@ -16,8 +16,12 @@ void Jogo::inicializar()
 		gRecursos.carregarMusica("praiafundo", "bin/assets/audios/praia.mp3", 20);
 	if (!gRecursos.carregouSpriteSheet("fundoInicial"))
 		gRecursos.carregarSpriteSheet("fundoInicial", "bin/assets/imagens/praiainicial.png", 1, 3);
-
 	background.setSpriteSheet("fundoInicial");
+
+	if(!gRecursos.carregouFonte("fonteMenu"))
+		gRecursos.carregarFonte("fonteMenu", "bin/assets/fontes/menu.ttf", 13);
+	texto.setFonte("fonteMenu");
+	texto.setCor(3, 0, 147);
 
 	
 	gRecursos.carregarSpriteSheet("bJogar", "bin/assets/botoes/jogar.png", 3);
@@ -174,4 +178,12 @@ void Jogo::telaGameOver()
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
+
+	texto.setString("Você fez um tempo de " + to_string(fase.getTempo()) + " segundos.");
+	texto.desenhar(250, 180);
+	texto.setString("Coletou " + to_string(personagem.getCocos()) + " cocos.");
+	texto.desenhar(250, 240);
+	texto.setString("Fatiou " + to_string(personagem.getTubaroes()) + " vezes os tubarões. Brabo!");
+	texto.desenhar(250, 300);
+	
 }

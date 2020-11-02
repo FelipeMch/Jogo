@@ -112,9 +112,9 @@ void Objetos::setVelocidade()
 {			
 	if (tempo >= 21)
 		velocidade = 2;
-	if (tempo >= 52)
+	if (tempo >= 102)
 		velocidade = 4;
-	if (tempo >= 154)
+	if (tempo >= 151)
 		velocidade = 5;
 
 	posicao.y = posicao.y + velocidade;
