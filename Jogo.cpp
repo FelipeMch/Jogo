@@ -17,6 +17,12 @@ void Jogo::inicializar()
 	if (!gRecursos.carregouSpriteSheet("fundoInicial"))
 		gRecursos.carregarSpriteSheet("fundoInicial", "bin/assets/imagens/praiainicial.png", 1, 3);
 	background.setSpriteSheet("fundoInicial");
+	if (!gRecursos.carregouSpriteSheet("telaCreditos"))
+		gRecursos.carregarSpriteSheet("telaCreditos", "bin/assets/imagens/fundocreditos.png", 1, 1);
+	creditosBackground.setSpriteSheet("telaCreditos");
+	if (!gRecursos.carregouSpriteSheet("telaInstrucoes"))
+		gRecursos.carregarSpriteSheet("telaInstrucoes", "bin/assets/imagens/fundoInstrucoes.png", 1, 1);
+	instrucoesBackground.setSpriteSheet("telaInstrucoes");
 
 	if(!gRecursos.carregouFonte("fonteMenu"))
 		gRecursos.carregarFonte("fonteMenu", "bin/assets/fontes/menu.ttf", 13);
@@ -149,6 +155,7 @@ void Jogo::telaCreditos()
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
+	creditosBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
 	botoes[bOk].atualizar();
 	botoes[bOk].desenhar();
 	if (botoes[bOk].estaClicado())
@@ -162,6 +169,7 @@ void Jogo::telaInstrucoes()
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
+	instrucoesBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
 	botoes[bVoltar].atualizar();
 	botoes[bVoltar].desenhar();
 	if (botoes[bVoltar].estaClicado())
@@ -178,6 +186,12 @@ void Jogo::telaGameOver()
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
+	botoes[bVoltar].atualizar();
+	botoes[bVoltar].desenhar();
+	if (botoes[bVoltar].estaClicado())
+	{
+		telaAtual = tInicial;
+	}
 
 	texto.setString("Você fez um tempo de " + to_string(fase.getTempo()) + " segundos.");
 	texto.desenhar(250, 180);

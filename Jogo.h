@@ -19,7 +19,7 @@ protected:
 
 	Fase fase;
 	Telas telaAtual;
-	Sprite background;
+	Sprite background, creditosBackground, instrucoesBackground;
 	BotaoSprite botoes[6];
 	Personagem personagem;
 	Texto texto;
