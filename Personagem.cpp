@@ -9,6 +9,7 @@ void Personagem::inicializar()
 		gRecursos.carregarSpriteSheet("FacadaCorrendo", "bin/assets/imagens/teste1faca.png", 1, 6);
 	if (!gRecursos.carregouAudio("apito"))
 		gRecursos.carregarAudio("apito", "bin/assets/audios/apito.mp3");
+	
 
 	spritePersoPrincipal.setSpriteSheet("spritePersoPrincipal");
 	
@@ -75,6 +76,7 @@ void Personagem::atualizarColisao(int v, bool morte)
 	}
 	else if (v < 0 && morte == true && podeMatar == true) // Se o obstaculo que é destrutivel pode morrer.
 	{
+		
 		totalTubaroes++;
 	}
 	else if (v < 0 && morte == true && podeMatar == false) // Se o obstaculo que é destrutivel pode matar o jogador.

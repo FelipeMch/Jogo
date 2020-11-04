@@ -11,7 +11,7 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	posicoes[2].x = 185;
 	posicoes[3].x = 600;
 	for (int p = 0; p < 4; p++)
-		posicoes[p].y = -60 * p - 130;
+		posicoes[p].y = -60 * p - 60;
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
@@ -22,6 +22,9 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 
 	if (!gRecursos.carregouSpriteSheet(this->nome))
 		gRecursos.carregarSpriteSheet(this->nome, this->caminho, animacoes, frames);
+	if (!gRecursos.carregouAudio("facada"))
+		gRecursos.carregarAudio("facada", "bin/assets/audios/somfaca.mp3");
+	
 
 	sprite.setSpriteSheet(this->nome);
 
@@ -52,9 +55,10 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 		}
 		if (destrutivel && verificarMorte == true && valor < 0)
 		{	
-
+			
 			if (sprite.getAnimacao() == 0)
 			{
+				gAudios.tocar("facada", 15);
 				sprite.setAnimacao(1, false);
 			}
 			else
@@ -92,7 +96,8 @@ void Objetos::resetarPosicao()
 	else
 	{
 		sorteado = rand() % 3 + 1;
-		if (sorteado == 1)
+		
+		 if (sorteado == 1)
 			posicao = posicoes[1];
 		else if (sorteado == 2)
 			posicao = posicoes[2];
@@ -106,13 +111,14 @@ void Objetos::resetarPosicao()
 void Objetos::finalizar()
 {
 	gRecursos.descarregarSpriteSheet(nome);
+	gRecursos.descarregarAudio("facada");
 }
 
 void Objetos::setVelocidade()
 {			
 	if (tempo >= 21)
 		velocidade = 2;
-	if (tempo >= 102)
+	if (tempo >= 101)
 		velocidade = 4;
 	if (tempo >= 151)
 		velocidade = 5;

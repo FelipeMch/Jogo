@@ -53,7 +53,7 @@ void Fase::executar()
 {
 	//Atualizações de tempo
 	tempo = gTempo.getTempoAteTickAtual(tInicio);
-	texto.setString("Tempo " + to_string(tempo * 10));
+	texto.setString("Tempo " + to_string(tempo));
 	texto.desenhar(gJanela.getLargura() / 4, gJanela.getAltura() / 10);	
 
 	//Movimentação da fase
