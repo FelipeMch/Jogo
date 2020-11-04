@@ -12,11 +12,18 @@ void Jogo::inicializar()
 {
 	uniInicializar(850, 800, false);
 
+	//Musicas
 	if(!gRecursos.carregouMusica("praiafundo"))
-		gRecursos.carregarMusica("praiafundo", "bin/assets/audios/praia.mp3", 20);
+		gRecursos.carregarMusica("praiafundo", "bin/assets/audios/praia.mp3", 10);
+	if (!gRecursos.carregouMusica("gameplay"))
+		gRecursos.carregarMusica("gameplay", "bin/assets/audios/musicafundo.mp3", 20);
+	
+	//SpriteSheet
 	if (!gRecursos.carregouSpriteSheet("fundoInicial"))
 		gRecursos.carregarSpriteSheet("fundoInicial", "bin/assets/imagens/praiainicial.png", 1, 3);
 	background.setSpriteSheet("fundoInicial");
+
+	//Telas
 	if (!gRecursos.carregouSpriteSheet("telaCreditos"))
 		gRecursos.carregarSpriteSheet("telaCreditos", "bin/assets/imagens/fundocreditos.png", 1, 1);
 	creditosBackground.setSpriteSheet("telaCreditos");
@@ -103,8 +110,11 @@ void Jogo::telaInicial()
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
-	if(!gMusica.estaTocando())
-		gMusica.tocar("praiafundo", 10);
+	if (!gMusica.estaTocando())
+	{
+		gMusica.tocar("praiafundo", true);
+		gMusica.tocar("gameplay", true);
+	}
 
 	//Inicio das Telas
 	botoes[bJogar].atualizar();
@@ -139,10 +149,9 @@ void Jogo::telaInicial()
 
 void Jogo::telaJogo()
 {
-	gMusica.parar();
 	fase.desenhar();
 	fase.executar();
-	
+		
 	if (personagem.getMorte() == false)
 	{
 		telaAtual = tGameOver;
@@ -166,6 +175,7 @@ void Jogo::telaCreditos()
 
 void Jogo::telaInstrucoes()
 {
+	
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
@@ -176,13 +186,11 @@ void Jogo::telaInstrucoes()
 	{
 		telaAtual = tInicial;
 	}
-
 }
 
 void Jogo::telaGameOver()
 {
-	if (!gMusica.estaTocando())
-		gMusica.tocar("praiafundo", 10);
+	gMusica.parar();
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);

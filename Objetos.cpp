@@ -8,10 +8,10 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	posicao.y = posicaoy;
 	posicoes[0].x = 320;
 	posicoes[1].x = 425;
-	posicoes[2].x = 185;
+	posicoes[2].x = 145;
 	posicoes[3].x = 600;
 	for (int p = 0; p < 4; p++)
-		posicoes[p].y = -60 * p - 60;
+		posicoes[p].y = -120;
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
@@ -86,7 +86,6 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 
 void Objetos::resetarPosicao()
 {
-
 	vivo = true;
 	if (sprite.getAnimacao() == 1)
 		sprite.setAnimacao(0, true);
@@ -96,15 +95,14 @@ void Objetos::resetarPosicao()
 	else
 	{
 		sorteado = rand() % 3 + 1;
-		
-		 if (sorteado == 1)
+
+		if (sorteado == 1)
 			posicao = posicoes[1];
 		else if (sorteado == 2)
 			posicao = posicoes[2];
 		else if (sorteado == 3)
 			posicao = posicoes[3];
 	}
-	
 }	
 
 
