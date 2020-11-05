@@ -76,6 +76,14 @@ void Fase::executar()
 		persoPrincipal->atualizarColisao(guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), guardas[1].getDestrutivel());
 	persoPrincipal->atualizarColisao(tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), tubarao.getDestrutivel());
 
+	for (int c = 0; c < 2; c++)
+	{
+		cocos[c].testarColisao(tubarao.getposicao(), tubarao.getSprite());
+		cocos[c].testarColisao(guardas[c].getposicao(), guardas[c].getSprite());
+	}
+	for (int g = 0; g < 2; g++)
+		guardas[g].testarColisao(tubarao.getposicao(), tubarao.getSprite());
+		
 
 }
 

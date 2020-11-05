@@ -12,8 +12,10 @@ public:
 	bool getDestrutivel() { return destrutivel; }
 	Vetor2D getposicao() { return posicao; }
 	Vetor2D getposicoes() { return posicoes[0]; }
+	Sprite getSprite() { return sprite; }
 	void finalizar();
 	void setVelocidade();
+	void testarColisao(Vetor2D posPersonagem, Sprite sprPersonagem);
 
 	
 

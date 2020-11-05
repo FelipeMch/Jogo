@@ -11,7 +11,7 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	posicoes[2].x = 145;
 	posicoes[3].x = 600;
 	for (int p = 0; p < 4; p++)
-		posicoes[p].y = -120;
+		posicoes[p].y = -60 * p - 60;
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
@@ -123,6 +123,16 @@ void Objetos::setVelocidade()
 
 	posicao.y = posicao.y + velocidade;
 }
+
+void Objetos::testarColisao(Vetor2D posPersonagem, Sprite sprPersonagem)
+{
+
+	if (uniTestarColisao(sprite, posicao.x, posicao.y, 0, sprPersonagem, posPersonagem.x, posPersonagem.y, 0))
+	{
+		posicao.y = -120;
+	}
+}
+
 
 
 

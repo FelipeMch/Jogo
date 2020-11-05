@@ -23,6 +23,7 @@ protected:
 	Objetos cocos[4], guardas[2], tubarao;
 	Vetor2D posicoes[2];
 	Uint64 tInicio;
+	bool colidiu;
 	int tempo, velocidade = 0;
 	Texto texto;
 };
