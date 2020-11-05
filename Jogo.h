@@ -1,13 +1,9 @@
 #pragma once
 #include "Fase.h"
 
-enum Telas { tJogo, tCreditos, tInstrucoes, tGameOver, tSaida, tInicial };
-enum Botoes { bJogar, bCreditos, bInstrucoes, bSair, bOk, bVoltar };
-
 class Jogo
 {
 public:
-
 	Jogo();
 	~Jogo();
 
@@ -16,19 +12,10 @@ public:
 	void finalizar();
 
 protected:
-
-	Fase fase;
-	Telas telaAtual;
-	Sprite background, creditosBackground, instrucoesBackground;
-	BotaoSprite botoes[6];
-	Personagem personagem;
+	Uint64 tInicio;
+	int tempo;
 	Texto texto;
-	int pontosTotais;
-	void telaInicial();
-	void telaJogo();
-	void telaCreditos();
-	void telaInstrucoes();
-	void telaGameOver();
+	Fase fase;
 	
 };
 
