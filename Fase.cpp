@@ -1,10 +1,10 @@
 #include "Fase.h"
 
-void Fase::inicializar(Personagem *personagem)
+void Fase::inicializar(Personagem* personagem)
 {
-	if(!gRecursos.carregouSpriteSheet("background"))
+	if (!gRecursos.carregouSpriteSheet("background"))
 		gRecursos.carregarSpriteSheet("background", "bin/assets/imagens/praiainicial.png", 1, 3);
-	
+
 
 	fundo.setSpriteSheet("background");
 
@@ -17,21 +17,21 @@ void Fase::inicializar(Personagem *personagem)
 	for (int g = 0; g < 2; g++)
 		guardas[g].inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 600, -60, -500, false);
 	tubarao.inicializar("tubarao", "bin/assets/imagens/tubaraonovo.png", 2, 2, 320, -200, -100, true);
-	
+
 
 	//Inicialação do tempo.
 	tInicio = gTempo.getTicks();
 	gRecursos.carregarFonte("fonte", "bin/assets/fontes/fonte.ttf", 17);
 	texto.setFonte("fonte");
 	texto.setCor(3, 0, 147);
-	
+
 
 	posicoes[0].x = gJanela.getLargura() / 2;
 	posicoes[0].y = gJanela.getAltura() / 2;
 	posicoes[1].x = gJanela.getLargura() / 2;
 	posicoes[1].y = gJanela.getAltura() / 2 - gJanela.getAltura();
 	velocidade = 2;
-	
+
 }
 
 void Fase::desenhar()
@@ -54,7 +54,7 @@ void Fase::executar()
 	//Atualizações de tempo
 	tempo = gTempo.getTempoAteTickAtual(tInicio);
 	texto.setString("Tempo " + to_string(tempo));
-	texto.desenhar(gJanela.getLargura() / 4, gJanela.getAltura() / 10);	
+	texto.desenhar(gJanela.getLargura() / 4, gJanela.getAltura() / 10);
 
 	//Movimentação da fase
 	controladorVelocidade();
@@ -64,7 +64,7 @@ void Fase::executar()
 	for (int c = 0; c < 2; c++)
 		cocos[c].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
 	guardas[0].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
-	if(tempo > 50)
+	if (tempo > 50)
 		guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
 	tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
 
@@ -72,18 +72,21 @@ void Fase::executar()
 	for (int c = 0; c < 2; c++)
 		persoPrincipal->atualizarColisao(cocos[c].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), cocos[c].getDestrutivel());
 	persoPrincipal->atualizarColisao(guardas[0].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), guardas[0].getDestrutivel());
-	if(tempo > 50)
+	if (tempo > 50)
 		persoPrincipal->atualizarColisao(guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), guardas[1].getDestrutivel());
 	persoPrincipal->atualizarColisao(tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), tubarao.getDestrutivel());
 
 	for (int c = 0; c < 2; c++)
 	{
 		cocos[c].testarColisao(tubarao.getposicao(), tubarao.getSprite());
-		cocos[c].testarColisao(guardas[c].getposicao(), guardas[c].getSprite());
+		cocos[c].testarColisao(guardas[0].getposicao(), guardas[0].getSprite());
+		if (tempo > 50)
+		{
+			cocos[c].testarColisao(guardas[1].getposicao(), guardas[1].getSprite());
+		}
 	}
 	for (int g = 0; g < 2; g++)
 		guardas[g].testarColisao(tubarao.getposicao(), tubarao.getSprite());
-		
 
 }
 
