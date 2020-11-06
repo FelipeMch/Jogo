@@ -6,13 +6,25 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	this->caminho = caminho;
 	posicao.x = posicaox;
 	posicao.y = posicaoy;
+	posicoes[0].x = 320;
+	posicoes[1].x = 425;
+	posicoes[2].x = 145;
+	posicoes[3].x = 600;
+	for (int p = 0; p < 4; p++)
+		posicoes[p].y = -60 * p - 60;
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
 	velocidade = 1;
+	srand(time(0));
+	tInicio = gTempo.getTicks();
+
 
 	if (!gRecursos.carregouSpriteSheet(this->nome))
 		gRecursos.carregarSpriteSheet(this->nome, this->caminho, animacoes, frames);
+	if (!gRecursos.carregouAudio("facada"))
+		gRecursos.carregarAudio("facada", "bin/assets/audios/somfaca.mp3");
+	
 
 	sprite.setSpriteSheet(this->nome);
 
@@ -20,41 +32,109 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 
 void Objetos::desenhar()
 {
-	if(vivo)
+	if (vivo)
+	{
 		sprite.desenhar(posicao.x, posicao.y);
+		sprite.avancarAnimacao();
+		sprite.setVelocidadeAnimacao(15);
+	}
 }
 
 int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verificarMorte)
 {
-	if(posicao.y < gJanela.getAltura() + 60) //Faz o objeto andar.
-		posicao.y = posicao.y + velocidade;
+	setVelocidade();
+	tempo = gTempo.getTempoAteTickAtual(tInicio);
 
 	if (uniTestarColisao(sprite, posicao.x, posicao.y, 0, sprPersonagem, posPersonagem.x, posPersonagem.y, 0) && vivo)
 	{
+		
 		if (destrutivel && valor > 0)
 		{
 			vivo = false;
+			resetarPosicao();
 		}
-		if ((destrutivel) && (valor < 0) && (verificarMorte == true))
-		{
-			valor = 1;
-			vivo = false;
+		if (destrutivel && verificarMorte == true && valor < 0)
+		{	
+			
+			if (sprite.getAnimacao() == 0)
+			{
+				gAudios.tocar("facada", 15);
+				sprite.setAnimacao(1, false);
+			}
+			else
+			{
+				if (sprite.terminouAnimacao())
+				{
+					vivo = false;
+					resetarPosicao();
+				}
+			}
 		}
 		else
 		{
-
+		
 		}
 
 		return valor;
 	}
 
+	if (posicao.y > 800)
+		resetarPosicao();
 
 	return 0;
 }
 
+void Objetos::resetarPosicao()
+{
+	vivo = true;
+	if (sprite.getAnimacao() == 1)
+		sprite.setAnimacao(0, true);
+
+	if (valor == -100)
+		posicao = posicoes[0];
+	else
+	{
+		sorteado = rand() % 3 + 1;
+
+		if (sorteado == 1)
+			posicao = posicoes[1];
+		else if (sorteado == 2)
+			posicao = posicoes[2];
+		else if (sorteado == 3)
+			posicao = posicoes[3];
+	}
+}	
+
+
 void Objetos::finalizar()
 {
-
 	gRecursos.descarregarSpriteSheet(nome);
-
+	gRecursos.descarregarAudio("facada");
 }
+
+void Objetos::setVelocidade()
+{			
+	if (tempo >= 21)
+		velocidade = 2;
+	if (tempo >= 101)
+		velocidade = 4;
+	if (tempo >= 151)
+		velocidade = 5;
+
+	posicao.y = posicao.y + velocidade;
+}
+
+void Objetos::testarColisao(Vetor2D posPersonagem, Sprite sprPersonagem)
+{
+
+	if (uniTestarColisao(sprite, posicao.x, posicao.y, 0, sprPersonagem, posPersonagem.x, posPersonagem.y, 0))
+	{
+		posicao.y = -120;
+	}
+}
+
+
+
+
+
+

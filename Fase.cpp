@@ -1,18 +1,23 @@
 #include "Fase.h"
 
-void Fase::inicializar()
+void Fase::inicializar(Personagem* personagem)
 {
-	if(!gRecursos.carregouSpriteSheet("background"))
-		gRecursos.carregarSpriteSheet("background", "bin/assets/imagens/fundopraia.png", 1, 1);
+	if (!gRecursos.carregouSpriteSheet("background"))
+		gRecursos.carregarSpriteSheet("background", "bin/assets/imagens/praiainicial.png", 1, 3);
+
 
 	fundo.setSpriteSheet("background");
 
+
 	//Inicialização do Personagem e objetos.
-	persoPrincipal.inicializar();
-	for (int c = 0; c < 4; c++)
-		cocos[c].inicializar("coco", "bin/assets/imagens/cocoteste.png", 1, 1, 300, 100 + c * 80, 1, 1);
-	guarda.inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 425, 50, -500, 0);
-	tubarao.inicializar("tubarao", "bin/assets/imagens/tubarao.png", 1, 1, 320, 100, -500, 1);
+	persoPrincipal = personagem; // associa personagem do jogo com o da fase;
+	persoPrincipal->inicializar();
+	for (int c = 0; c < 2; c++)
+		cocos[c].inicializar("coco", "bin/assets/imagens/cocoteste.png", 1, 1, 300, 0 + c * -80, 10, true);
+	for (int g = 0; g < 2; g++)
+		guardas[g].inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 600, -60, -500, false);
+	tubarao.inicializar("tubarao", "bin/assets/imagens/tubaraonovo.png", 2, 2, 320, -200, -100, true);
+
 
 	//Inicialação do tempo.
 	tInicio = gTempo.getTicks();
@@ -20,60 +25,98 @@ void Fase::inicializar()
 	texto.setFonte("fonte");
 	texto.setCor(3, 0, 147);
 
+
 	posicoes[0].x = gJanela.getLargura() / 2;
 	posicoes[0].y = gJanela.getAltura() / 2;
 	posicoes[1].x = gJanela.getLargura() / 2;
 	posicoes[1].y = gJanela.getAltura() / 2 - gJanela.getAltura();
 	velocidade = 2;
+
 }
 
 void Fase::desenhar()
 {
 	fundo.desenhar(posicoes[0].x, posicoes[0].y);
 	fundo.desenhar(posicoes[1].x, posicoes[1].y);
-	persoPrincipal.desenhar();
-	for (int c = 0; c < 4; c++)
+	fundo.avancarAnimacao();
+	fundo.setVelocidadeAnimacao(0.6);
+	persoPrincipal->desenhar();
+	for (int c = 0; c < 2; c++)
 		cocos[c].desenhar();
-	guarda.desenhar();
+	guardas[0].desenhar();
+	if (tempo > 50)
+		guardas[1].desenhar();
 	tubarao.desenhar();
 }
 
 void Fase::executar()
 {
-	//Movimentação da fase
-	posicoes[0].y = posicoes[0].y + velocidade;
-	posicoes[1].y = posicoes[1].y + velocidade;
-	if (posicoes[0].y == +gJanela.getAltura() / 2)
-		posicoes[1].y = gJanela.getAltura() / 2 - gJanela.getAltura();
-	if (posicoes[1].y == +gJanela.getAltura() / 2)
-		posicoes[0].y = gJanela.getAltura() / 2 - gJanela.getAltura();
-
-	//Atualizações das execuções
-	persoPrincipal.executar();
-	for (int c = 0; c < 4; c++)
-		cocos[c].executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar());
-	guarda.executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar());
-	tubarao.executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar());
-	
-	//Atualizações das colisões
-	for (int c = 0; c < 4; c++)
-		persoPrincipal.atualizarColisao(cocos[c].executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar()));
-	persoPrincipal.atualizarColisao(guarda.executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar()));
-	persoPrincipal.atualizarColisao(tubarao.executar(persoPrincipal.getPosicao(), persoPrincipal.getSprite(), persoPrincipal.getPodeMatar()));
-
-
 	//Atualizações de tempo
 	tempo = gTempo.getTempoAteTickAtual(tInicio);
-	texto.setString("Pontos " + to_string(tempo));
+	texto.setString("Tempo " + to_string(tempo));
 	texto.desenhar(gJanela.getLargura() / 4, gJanela.getAltura() / 10);
+
+	//Movimentação da fase
+	controladorVelocidade();
+
+	//Atualizações das execuções
+	persoPrincipal->executar();
+	for (int c = 0; c < 2; c++)
+		cocos[c].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+	guardas[0].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+	if (tempo > 50)
+		guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+	tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+
+	//Atualizações das colisões
+	for (int c = 0; c < 2; c++)
+		persoPrincipal->atualizarColisao(cocos[c].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), cocos[c].getDestrutivel());
+	persoPrincipal->atualizarColisao(guardas[0].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), guardas[0].getDestrutivel());
+	if (tempo > 50)
+		persoPrincipal->atualizarColisao(guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), guardas[1].getDestrutivel());
+	persoPrincipal->atualizarColisao(tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), tubarao.getDestrutivel());
+
+	for (int c = 0; c < 2; c++)
+	{
+		cocos[c].testarColisao(tubarao.getposicao(), tubarao.getSprite());
+		cocos[c].testarColisao(guardas[0].getposicao(), guardas[0].getSprite());
+		if (tempo > 50)
+		{
+			cocos[c].testarColisao(guardas[1].getposicao(), guardas[1].getSprite());
+		}
+	}
+	for (int g = 0; g < 2; g++)
+		guardas[g].testarColisao(tubarao.getposicao(), tubarao.getSprite());
+
 }
 
 void Fase::finalizar()
 {
 	gRecursos.descarregarSpriteSheet("background");
-	persoPrincipal.finalizar();
-	for (int c = 0; c < 4; c++)
+	persoPrincipal->finalizar();
+	for (int c = 0; c < 2; c++)
 		cocos[c].finalizar();
-	guarda.finalizar();
+	for (int g = 0; g < 2; g++)
+		guardas[g].finalizar();
 	tubarao.finalizar();
+}
+
+void Fase::controladorVelocidade()
+{
+	if (tempo >= 20)
+		if (posicoes[0].y == gJanela.getAltura() / 2)
+			velocidade = 4;
+	if (tempo >= 100)
+		if (posicoes[0].y == gJanela.getAltura() / 2)
+			velocidade = 8;
+	if (tempo >= 150)
+		if (posicoes[0].y == gJanela.getAltura() / 2)
+			velocidade = 10;
+
+	posicoes[0].y = posicoes[0].y + velocidade;
+	posicoes[1].y = posicoes[1].y + velocidade;
+	if (posicoes[0].y == gJanela.getAltura() / 2)
+		posicoes[1].y = gJanela.getAltura() / 2 - gJanela.getAltura();
+	if (posicoes[1].y == gJanela.getAltura() / 2)
+		posicoes[0].y = gJanela.getAltura() / 2 - gJanela.getAltura();
 }
