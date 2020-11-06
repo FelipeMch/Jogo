@@ -119,7 +119,7 @@ void Objetos::finalizar()
 
 void Objetos::setVelocidade()
 {	
-	if (tempo == 0)
+	if (tempo >= 0)
 		velocidade = 1;
 	if (tempo >= 21)
 		velocidade = 2;

@@ -17,6 +17,7 @@ public:
 	bool getMorte() { return vivo; }
 	int getCocos() { return totalCocos; }
 	int getTubaroes() { return totalTubaroes; }
+	void resetContador();
 	int getPontos() { return pontos; }
 	void atualizarColisao(int v, bool morte);
 	void resetarPosicao();

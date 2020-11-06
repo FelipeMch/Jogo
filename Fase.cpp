@@ -76,18 +76,22 @@ void Fase::executar()
 		persoPrincipal->atualizarColisao(guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), guardas[1].getDestrutivel());
 	persoPrincipal->atualizarColisao(tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), tubarao.getDestrutivel());
 
+
+	//Atualizações de colisão dos objetos
 	for (int c = 0; c < 2; c++)
 	{
 		cocos[c].testarColisao(tubarao.getposicao(), tubarao.getSprite());
 		cocos[c].testarColisao(guardas[0].getposicao(), guardas[0].getSprite());
+		cocos[0].testarColisao(cocos[1].getposicao(), cocos[1].getSprite());
 		if (tempo > 50)
-		{
 			cocos[c].testarColisao(guardas[1].getposicao(), guardas[1].getSprite());
-		}
+
 	}
 	for (int g = 0; g < 2; g++)
 		guardas[g].testarColisao(tubarao.getposicao(), tubarao.getSprite());
 
+	if (tempo > 50)
+		guardas[0].testarColisao(guardas[1].getposicao(), guardas[1].getSprite());
 }
 
 void Fase::finalizar()

@@ -62,6 +62,12 @@ void Personagem::executar()
 	}
 }
 
+void Personagem::resetContador()
+{
+	totalCocos = 0;
+	totalTubaroes = 0;
+}
+
 void Personagem::atualizarColisao(int v, bool morte)
 {
 

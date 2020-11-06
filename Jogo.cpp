@@ -10,11 +10,11 @@ Jogo::~Jogo()
 
 void Jogo::inicializar()
 {
-	uniInicializar(850, 800, false);
+	uniInicializar(850, 800, false, "Naked Guy");
 
 	//Musicas
-	if(!gRecursos.carregouMusica("praiafundo"))
-		gRecursos.carregarMusica("praiafundo", "bin/assets/audios/praia.mp3", 10);
+	if(!gRecursos.carregouAudio("praiafundo"))
+		gRecursos.carregarAudio("praiafundo", "bin/assets/audios/praia.mp3");
 	if (!gRecursos.carregouMusica("gameplay"))
 		gRecursos.carregarMusica("gameplay", "bin/assets/audios/musicafundo.mp3", 20);
 	
@@ -22,6 +22,9 @@ void Jogo::inicializar()
 	if (!gRecursos.carregouSpriteSheet("fundoInicial"))
 		gRecursos.carregarSpriteSheet("fundoInicial", "bin/assets/imagens/praiainicial.png", 1, 3);
 	background.setSpriteSheet("fundoInicial");
+	if (!gRecursos.carregouSpriteSheet("nomejogo"))
+		gRecursos.carregarSpriteSheet("nomejogo", "bin/assets/imagens/nomejogo.png", 1, 1);
+	nomeJogo.setSpriteSheet("nomejogo");
 
 	//Telas
 	if (!gRecursos.carregouSpriteSheet("telaCreditos"))
@@ -110,11 +113,9 @@ void Jogo::telaInicial()
 	background.desenhar(425, 400);
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
-	if (!gMusica.estaTocando())
-	{
-		gMusica.tocar("praiafundo", true);
-		gMusica.tocar("gameplay", true);
-	}
+	nomeJogo.desenhar(gJanela.getLargura() / 2, 300);
+	gAudios.tocar("praiafundo", 10);
+	personagem.resetContador(); // Zera os cocos e tubarões sempre que inicia a tela de jogo.
 
 	//Inicio das Telas
 	botoes[bJogar].atualizar();
@@ -149,6 +150,9 @@ void Jogo::telaInicial()
 
 void Jogo::telaJogo()
 {
+	if (!gMusica.estaTocando())
+		gMusica.tocar("gameplay", true);
+
 	fase.desenhar();
 	fase.executar();
 		
