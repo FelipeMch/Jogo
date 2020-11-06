@@ -12,6 +12,7 @@ public:
 	bool getDestrutivel() { return destrutivel; }
 	Vetor2D getposicao() { return posicao; }
 	Vetor2D getposicoes() { return posicoes[0]; }
+	void setarPosicoesRespawn(int x0, int x1, int x2, int x3, int y);
 	Sprite getSprite() { return sprite; }
 	void finalizar();
 	void setVelocidade();

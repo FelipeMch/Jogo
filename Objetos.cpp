@@ -6,12 +6,7 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	this->caminho = caminho;
 	posicao.x = posicaox;
 	posicao.y = posicaoy;
-	posicoes[0].x = 320;
-	posicoes[1].x = 425;
-	posicoes[2].x = 145;
-	posicoes[3].x = 600;
-	for (int p = 0; p < 4; p++)
-		posicoes[p].y = -60 * p - 60;
+	setarPosicoesRespawn(320, 425, 145, 600, -60); // Posições de respawn dos objetos.
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
@@ -106,6 +101,16 @@ void Objetos::resetarPosicao()
 }	
 
 
+void Objetos::setarPosicoesRespawn(int x0, int x1, int x2, int x3, int y)
+{
+	posicoes[0].x = x0;
+	posicoes[1].x = x1;
+	posicoes[2].x = x2;
+	posicoes[3].x = x3;
+	for (int p = 0; p < 4; p++)
+		posicoes[p].y = y * p + y;
+}
+
 void Objetos::finalizar()
 {
 	gRecursos.descarregarSpriteSheet(nome);
@@ -113,7 +118,9 @@ void Objetos::finalizar()
 }
 
 void Objetos::setVelocidade()
-{			
+{	
+	if (tempo == 0)
+		velocidade = 1;
 	if (tempo >= 21)
 		velocidade = 2;
 	if (tempo >= 101)
