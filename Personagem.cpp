@@ -99,7 +99,7 @@ void Personagem::resetarPosicao()
 
 void Personagem::finalizar()
 {
-	gRecursos.descarregarSpriteSheet("persoPrincipal");
+	gRecursos.descarregarSpriteSheet("spritePersoPrincipal");
 	gRecursos.descarregarSpriteSheet("FacadaCorrendo");
 	gRecursos.descarregarAudio("apito");
 }
