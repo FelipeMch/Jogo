@@ -30,7 +30,7 @@ void Fase::inicializar(Personagem* personagem)
 	posicoes[0].y = gJanela.getAltura() / 2;
 	posicoes[1].x = gJanela.getLargura() / 2;
 	posicoes[1].y = gJanela.getAltura() / 2 - gJanela.getAltura();
-	velocidade = 2;
+	velocidade = 1;
 
 }
 
@@ -109,13 +109,13 @@ void Fase::controladorVelocidade()
 {
 	if (tempo >= 20)
 		if (posicoes[0].y == gJanela.getAltura() / 2)
-			velocidade = 4;
+			velocidade = 2;
 	if (tempo >= 100)
 		if (posicoes[0].y == gJanela.getAltura() / 2)
-			velocidade = 8;
-	if (tempo >= 150)
+			velocidade = 4;
+	if (tempo >= 200)
 		if (posicoes[0].y == gJanela.getAltura() / 2)
-			velocidade = 10;
+			velocidade = 8;
 
 	posicoes[0].y = posicoes[0].y + velocidade;
 	posicoes[1].y = posicoes[1].y + velocidade;

@@ -26,9 +26,9 @@ protected:
 	string nome, caminho;
 	Vetor2D posicao, posicoes[4];
 	bool vivo, destrutivel;
-	int valor, velocidade = 0, sorteado, tempo;
+	int valor, sorteado, tempo;
 	Uint64 tInicio;
-	
+	float velocidade = 0;
 	
 };
 

@@ -10,7 +10,7 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 	this->valor = valor;
 	this->destrutivel = destrutivel;
 	vivo = true;
-	velocidade = 1;
+	velocidade = 0.5;
 	srand(time(0));
 	tInicio = gTempo.getTicks();
 
@@ -120,13 +120,13 @@ void Objetos::finalizar()
 void Objetos::setVelocidade()
 {	
 	if (tempo >= 0)
+		velocidade = 0.5;
+	if (tempo >= 28)
 		velocidade = 1;
-	if (tempo >= 21)
+	if (tempo >= 105)
 		velocidade = 2;
-	if (tempo >= 101)
+	if (tempo >= 201)
 		velocidade = 4;
-	if (tempo >= 151)
-		velocidade = 5;
 
 	posicao.y = posicao.y + velocidade;
 }

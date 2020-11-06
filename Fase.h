@@ -24,7 +24,8 @@ protected:
 	Vetor2D posicoes[2];
 	Uint64 tInicio;
 	bool colidiu;
-	int tempo, velocidade = 0;
+	int tempo;
 	Texto texto;
+	float velocidade = 0;
 };
 
