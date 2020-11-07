@@ -59,14 +59,6 @@ void Fase::executar()
 	//Movimentação da fase
 	controladorVelocidade();
 
-	//Atualizações das execuções
-	persoPrincipal->executar();
-	for (int c = 0; c < 2; c++)
-		cocos[c].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
-	guardas[0].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
-	if (tempo > 50)
-		guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
-	tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
 
 	//Atualizações das colisões
 	for (int c = 0; c < 2; c++)
@@ -76,6 +68,14 @@ void Fase::executar()
 		persoPrincipal->atualizarColisao(guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), guardas[1].getDestrutivel());
 	persoPrincipal->atualizarColisao(tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar()), tubarao.getDestrutivel());
 
+	//Atualizações das execuções
+	persoPrincipal->executar();
+	for (int c = 0; c < 2; c++)
+		cocos[c].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+	guardas[0].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+	if (tempo > 50)
+		guardas[1].executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
+	tubarao.executar(persoPrincipal->getPosicao(), persoPrincipal->getSprite(), persoPrincipal->getPodeMatar());
 
 	//Atualizações de colisão dos objetos
 	for (int c = 0; c < 2; c++)
