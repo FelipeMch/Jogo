@@ -1,9 +1,11 @@
 #include "Objetos.h"
 
-void Objetos::inicializar(string nome, string caminho, int animacoes, int frames, float posicaox, float posicaoy, int valor, bool destrutivel)
+void Objetos::inicializar(string nomeSom, string caminhoSom, string nome, string caminho, int animacoes, int frames, float posicaox, float posicaoy, int valor, bool destrutivel)
 {
 	this->nome = nome;
 	this->caminho = caminho;
+	this->nomeSom = nomeSom;
+	this->caminhoSom = caminhoSom;
 	posicao.x = posicaox;
 	posicao.y = posicaoy;
 	setarPosicoesRespawn(320, 425, 145, 600, -60); // Posições de respawn dos objetos.
@@ -17,8 +19,8 @@ void Objetos::inicializar(string nome, string caminho, int animacoes, int frames
 
 	if (!gRecursos.carregouSpriteSheet(this->nome))
 		gRecursos.carregarSpriteSheet(this->nome, this->caminho, animacoes, frames);
-	if (!gRecursos.carregouAudio("facada"))
-		gRecursos.carregarAudio("facada", "bin/assets/audios/somfaca.mp3");
+	if (!gRecursos.carregouAudio(this->nomeSom))
+		gRecursos.carregarAudio(this->nomeSom, this->caminhoSom);
 	
 
 	sprite.setSpriteSheet(this->nome);
@@ -45,6 +47,7 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 		
 		if (destrutivel && valor > 0)
 		{
+			gAudios.tocar("somcoco", 80);
 			vivo = false;
 			resetarPosicao();
 		}
@@ -53,7 +56,7 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 			
 			if (sprite.getAnimacao() == 0)
 			{
-				gAudios.tocar("facada", 15);
+				gAudios.tocar("facada", 80);
 				sprite.setAnimacao(1, false);
 			}
 			else
@@ -64,6 +67,10 @@ int Objetos::executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verifica
 					resetarPosicao();
 				}
 			}
+		}
+		if (!destrutivel)
+		{
+			gAudios.tocar("apito", 15);
 		}
 		else
 		{
@@ -114,7 +121,7 @@ void Objetos::setarPosicoesRespawn(int x0, int x1, int x2, int x3, int y)
 void Objetos::finalizar()
 {
 	gRecursos.descarregarSpriteSheet(nome);
-	gRecursos.descarregarAudio("facada");
+	gRecursos.descarregarAudio(nomeSom);
 }
 
 void Objetos::setVelocidade()

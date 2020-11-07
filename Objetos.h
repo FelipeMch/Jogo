@@ -5,7 +5,7 @@ class Objetos
 {
 public:
 
-	void inicializar(string nome, string caminho, int animacoes, int frames, float posicaox, float posicaoy, int valor, bool destrutivel);
+	void inicializar(string nomeSom, string caminhoSom, string nome, string caminho, int animacoes, int frames, float posicaox, float posicaoy, int valor, bool destrutivel);
 	void desenhar();
 	int executar(Vetor2D posPersonagem, Sprite sprPersonagem, bool verificarMorte);
 	void resetarPosicao();
@@ -23,7 +23,7 @@ public:
 protected:
 
 	Sprite sprite;
-	string nome, caminho;
+	string nome, caminho, caminhoSom, nomeSom;
 	Vetor2D posicao, posicoes[4];
 	bool vivo, destrutivel;
 	int valor, sorteado, tempo;

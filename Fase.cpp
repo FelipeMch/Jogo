@@ -13,10 +13,10 @@ void Fase::inicializar(Personagem* personagem)
 	persoPrincipal = personagem; // associa personagem do jogo com o da fase;
 	persoPrincipal->inicializar();
 	for (int c = 0; c < 2; c++)
-		cocos[c].inicializar("coco", "bin/assets/imagens/cocoteste.png", 1, 1, 300, 0 + c * -80, 10, true);
+		cocos[c].inicializar("somcoco", "bin/assets/audios/cocosom.mp3", "coco", "bin/assets/imagens/cocoteste.png", 1, 1, 300, 0 + c * -80, 10, true);
 	for (int g = 0; g < 2; g++)
-		guardas[g].inicializar("guarda", "bin/assets/imagens/guardateste.png", 1, 1, 600, -60, -500, false);
-	tubarao.inicializar("tubarao", "bin/assets/imagens/tubaraonovo.png", 2, 2, 320, -200, -100, true);
+		guardas[g].inicializar("apito", "bin/assets/audios/apito.mp3", "guarda", "bin/assets/imagens/guardateste.png", 1, 1, 600, -60, -500, false);
+	tubarao.inicializar("facada", "bin/assets/audios/somfaca.mp3", "tubarao", "bin/assets/imagens/tubaraonovo.png", 2, 2, 320, -200, -100, true);
 
 
 	//Inicialação do tempo.

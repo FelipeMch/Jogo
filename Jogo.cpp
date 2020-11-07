@@ -13,10 +13,10 @@ void Jogo::inicializar()
 	uniInicializar(850, 800, false, "Naked Guy");
 
 	//Musicas
-	if(!gRecursos.carregouAudio("praiafundo"))
-		gRecursos.carregarAudio("praiafundo", "bin/assets/audios/praia.mp3");
+	if(!gRecursos.carregouMusica("praiafundo"))
+		gRecursos.carregarMusica("praiafundo", "bin/assets/audios/praia.mp3", 30);
 	if (!gRecursos.carregouMusica("gameplay"))
-		gRecursos.carregarMusica("gameplay", "bin/assets/audios/musicafundo.mp3", 20);
+		gRecursos.carregarMusica("gameplay", "bin/assets/audios/musicafundo.mp3", 50);
 	
 	//SpriteSheet
 	if (!gRecursos.carregouSpriteSheet("fundoInicial"))
@@ -114,7 +114,8 @@ void Jogo::telaInicial()
 	background.avancarAnimacao();
 	background.setVelocidadeAnimacao(0.4);
 	nomeJogo.desenhar(gJanela.getLargura() / 2, 300);
-	gAudios.tocar("praiafundo", 10);
+	if (!gMusica.estaTocando())
+		gMusica.tocar("praiafundo", true);
 	personagem.resetContador(); // Zera os cocos e tubarões sempre que inicia a tela de jogo.
 
 	//Inicio das Telas
@@ -122,6 +123,7 @@ void Jogo::telaInicial()
 	botoes[bJogar].desenhar();
 	if (botoes[bJogar].estaClicado())
 	{
+		gMusica.pausar();
 		telaAtual = tJogo;
 		fase.inicializar(&personagem); //& pega o endereço do personagem na memória
 	}
@@ -150,6 +152,7 @@ void Jogo::telaInicial()
 
 void Jogo::telaJogo()
 {
+	
 	if (!gMusica.estaTocando())
 		gMusica.tocar("gameplay", true);
 
