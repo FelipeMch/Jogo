@@ -70,7 +70,7 @@ void Personagem::atualizarColisao(int v, bool morte)
 
 	if (v > 0) // Valores maiores que zero são os bonus, no caso o coco.
 	{
-		totalCocos++;
+		totalCocos += 1;
 	}
 	else if (v < 0 && morte == false) // guardas.
 	{
@@ -78,8 +78,7 @@ void Personagem::atualizarColisao(int v, bool morte)
 	}
 	else if (v < 0 && morte == true && podeMatar == true) // Se o obstaculo que é destrutivel pode morrer.
 	{
-		
-		totalTubaroes++;
+		totalTubaroes += 1;
 	}
 	else if (v < 0 && morte == true && podeMatar == false) // Se o obstaculo que é destrutivel pode matar o jogador.
 	{

@@ -21,7 +21,6 @@ void Objetos::inicializar(string nomeSom, string caminhoSom, string nome, string
 		gRecursos.carregarSpriteSheet(this->nome, this->caminho, animacoes, frames);
 	if (!gRecursos.carregouAudio(this->nomeSom))
 		gRecursos.carregarAudio(this->nomeSom, this->caminhoSom);
-	
 
 	sprite.setSpriteSheet(this->nome);
 

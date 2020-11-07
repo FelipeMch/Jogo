@@ -116,7 +116,6 @@ void Jogo::telaInicial()
 	nomeJogo.desenhar(gJanela.getLargura() / 2, 300);
 	if (!gMusica.estaTocando())
 		gMusica.tocar("praiafundo", true);
-	personagem.resetContador(); // Zera os cocos e tubarões sempre que inicia a tela de jogo.
 
 	//Inicio das Telas
 	botoes[bJogar].atualizar();
@@ -205,6 +204,7 @@ void Jogo::telaGameOver()
 	botoes[bVoltar].desenhar();
 	if (botoes[bVoltar].estaClicado())
 	{
+		personagem.resetContador(); // Zera os cocos e tubarões sempre que inicia a tela de jogo.
 		telaAtual = tInicial;
 	}
 
